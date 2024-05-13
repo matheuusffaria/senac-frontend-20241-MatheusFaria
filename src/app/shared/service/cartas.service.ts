@@ -1,0 +1,39 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Carta } from './model/carta';
+import { CartaSeletor } from './model/seletor/carta.seletor';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CartasService {
+  //URL base da API de cartas
+  private readonly API = 'http://localhost:8080/senac-20241-backend-exemplos/rest/carta'
+  constructor(private httpClient: HttpClient) { }
+
+salvar(carta: Carta): Observable<any> {
+  return this.httpClient.post(this.API, carta);
+}
+
+atualizar(carta: Carta): Observable<any> {
+  return this.httpClient.put(this.API, carta);
+}
+
+excluir(id: number): Observable<any> {
+  return this.httpClient.delete(this.API + '/' +id);
+}
+
+consultar(id: number): Observable<Carta> {
+  return this.httpClient.get<Carta>(this.API + '/' +id);
+}
+
+listarTodas(): Observable<Array<Carta>> {
+  return this.httpClient.get<Array<Carta>>(this.API + '/todas');
+}
+ListarComSeletor(seletor: CartaSeletor): Observable<Array<Carta>> {
+//TODO desenvolver no backend o respectivo método
+//(em CartaController.java) para atender essa chamada
+return this.httpClient.post<Array<Carta>>(this.API+ '/filtrar', seletor);
+}
+}

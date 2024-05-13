@@ -1,0 +1,21 @@
+<br><br>
+<table class="table table-striped border">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Total de partidas</th>
+      <th>Porcentagem de vitória</th>
+      <th>Data de nascimento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr scope="row" *ngFor="let jogadores of jogadores">
+      <td>{{jogadores.nome}}</td>
+      <td>{{jogadores.email}}</td>
+      <td>{{jogadores.totalPartidas}}</td>
+      <td>{{jogadores.percentualVitorias}}</td>
+      <td>{{jogadores.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+    </tr>
+</table>
+<router-outlet></router-outlet>
